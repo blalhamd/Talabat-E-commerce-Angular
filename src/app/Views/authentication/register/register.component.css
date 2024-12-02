@@ -1,0 +1,39 @@
+#form div .form-group {
+  width: 100%;
+  border-bottom: 1.5px solid black;
+  padding-bottom: 5px;
+}
+
+.form-group input {
+  border: none;
+  outline: none;
+}
+
+.form-group input:focus::placeholder {
+  font-size: small;
+  opacity: .8;
+}
+
+@media (max-width: 768px) {
+  #responsive-image {
+    display: none; /* Hide the image on small screens */
+  }
+}
+
+#form div .form-group.ng-valid {
+  border-bottom: 1.5px solid green;
+}
+
+#form div .form-group.ng-invalid {
+  border-bottom: 1.5px solid darkred;
+}
+
+#form div {
+  position: relative;
+}
+
+#form div span {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}

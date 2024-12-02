@@ -1,0 +1,22 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@100;200;300;400;500;600;700;800;900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+*{
+  font-family: "Encode Sans Expanded", sans-serif;
+}
+
+:root {
+  --main-color:rgb(24, 169, 24);
+}
+
+.sidebar {
+  height: 100vh;
+  max-height: 100vh;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  width: 280px;
+}
+
+.main-color {
+  background-color: var(--main-color);
+}

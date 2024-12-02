@@ -1,0 +1,81 @@
+<div class="row justify-content-between align-items-start p-4">
+  <div class="col-md-4 col-12 mt-3">
+    <form [formGroup]="RegisterForm" (submit)="OnSubmit(RegisterForm)" id="form">
+      <h4 class="text-center fw-bold my-2">Register</h4>
+      <div>
+        <div class="form-group my-3"
+          [ngClass]="{'ng-invalid':name?.invalid && name?.touched,'ng-valid':name?.valid && name?.touched}">
+          <input type="name" formControlName="name" placeholder="Name">
+        </div>
+        <div class="alert alert-danger" *ngIf="name?.errors && name?.touched">
+          <p class="m-0" *ngIf="name?.getError('required')">Name is required</p>
+          <p class="m-0" *ngIf="name?.getError('minlength')">min length is 3 letters</p>
+          <p class="m-0" *ngIf="name?.getError('InvalidName')">Name must be letters only</p>
+        </div>
+        <span *ngIf="name?.valid && name?.touched">✅</span>
+        <span *ngIf="name?.invalid && name?.touched">❌</span>
+      </div>
+      <div>
+        <div class="form-group my-3"
+          [ngClass]="{'ng-valid':email?.valid && email?.touched,'ng-invalid':email?.invalid && email?.touched}">
+          <input type="email" formControlName="email" placeholder="example@gmail.com">
+        </div>
+        <div class="alert alert-danger" *ngIf="email?.errors && email?.touched">
+          <p class="m-0" *ngIf="email?.getError('required')">Email is required</p>
+          <p class="m-0" *ngIf="email?.getError('email')">Email is invalid</p>
+          <p class="m-0" *ngIf="email?.getError('InvalidEmail')">Email must be more complex</p>
+        </div>
+        <span *ngIf="email?.valid && email?.touched">✅</span>
+        <span *ngIf="email?.invalid && email?.touched">❌</span>
+      </div>
+      <div>
+        <div class="form-group my-3"
+          [ngClass]="{'ng-valid':password?.valid && password?.touched,'ng-invalid':password?.invalid && password?.touched}">
+          <input type="password" formControlName="password" placeholder="*******">
+        </div>
+        <div class="alert alert-danger" *ngIf="password?.errors && password?.touched">
+          <p class="m-0" *ngIf="password?.getError('required')">Password is required</p>
+        </div>
+        <span *ngIf="password?.valid && password?.touched">✅</span>
+        <span *ngIf="password?.invalid && password?.touched">❌</span>
+      </div>
+      <div>
+        <div class="form-group my-3"
+          [ngClass]="{'ng-valid':rePassword?.valid && rePassword?.touched,'ng-invalid':rePassword?.invalid && rePassword?.touched}">
+          <input type="password" formControlName="rePassword" placeholder="*******">
+        </div>
+        <div class="alert alert-danger" *ngIf="rePassword?.errors && rePassword?.touched">
+          <p class="m-0" *ngIf="rePassword?.getError('required')">Confirm Password is required</p>
+          <p class="m-0" *ngIf="rePassword?.getError('NotMatched')">Confirm Password must match Password</p>
+        </div>
+        <span *ngIf="rePassword?.valid && rePassword?.touched">✅</span>
+        <span *ngIf="rePassword?.invalid && rePassword?.touched">❌</span>
+      </div>
+      <div>
+        <div class="form-group my-3"
+          [ngClass]="{'ng-valid':phone?.valid && phone?.touched,'ng-invalid':phone?.invalid && phone?.touched}">
+          <input type="tel" formControlName="phone" placeholder="Phone">
+        </div>
+        <div class="alert alert-danger" *ngIf="phone?.errors && phone?.touched">
+          <p class="m-0" *ngIf="phone?.getError('required')">Phone is required</p>
+        </div>
+        <span *ngIf="phone?.valid && phone?.touched">✅</span>
+        <span *ngIf="phone?.invalid && phone?.touched">❌</span>
+      </div>
+      <div>
+        <div class="form-group2 my-2">
+          <button type="submit" class="btn btn-success d-block ms-auto my-2" [disabled]="RegisterForm.invalid">
+            <i class="fas fa-spinner fa-spin" *ngIf="IsLoading"></i>
+            <p class="m-0" *ngIf="!IsLoading">Register</p>
+          </button>
+        </div>
+      </div>
+      <div class="d-flex flex-column gap-1">
+        <p>You already have Account:<a href="/Auth/Authentication/Login" class="text-warning my-2"> Sign In</a></p>
+      </div>
+    </form>
+  </div>
+  <div class="d-none d-md-block col-md-6 text-center">
+    <img src="assets/images/Sign up-bro.png" alt="img" class="img-fluid" id="responsive-image">
+  </div>
+</div>

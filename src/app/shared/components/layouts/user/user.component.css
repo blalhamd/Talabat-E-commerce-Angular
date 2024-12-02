@@ -1,0 +1,18 @@
+ul {
+  list-style: none;
+  padding-top: 15px;
+}
+
+ul li {
+  margin-bottom: 5px;
+}
+
+ul li::before {
+  content: "-";
+  font-weight: bold;
+  margin-right: 3px;
+}
+
+ul li a {
+  text-decoration: none;
+}

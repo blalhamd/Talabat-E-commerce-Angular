@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="row justify-content-around align-items-start p-4">
+    <div class="col-md-4 col-12 mt-3">
+      <form [formGroup]="address" (submit)="OnSubmit(address)" id="form">
+        <h4 class="text-center fw-bold my-2">Your Address</h4>
+        <div>
+          <div class="form-group my-3"
+            [ngClass]="{'ng-invalid':details?.invalid && details?.touched,'ng-valid':details?.valid && details?.touched}">
+            <input type="text" formControlName="details" placeholder="details">
+          </div>
+          <div class="alert alert-danger" *ngIf="details?.errors && details?.touched">
+            <p class="m-0" *ngIf="details?.getError('required')">details is required</p>
+          </div>
+          <span *ngIf="details?.valid && details?.touched">✅</span>
+          <span *ngIf="details?.invalid && details?.touched">❌</span>
+        </div>
+        <div>
+          <div class="form-group my-3"
+            [ngClass]="{'ng-valid':city?.valid && city?.touched,'ng-invalid':city?.invalid && city?.touched}">
+            <input type="text" formControlName="city" placeholder="city">
+          </div>
+          <div class="alert alert-danger" *ngIf="city?.errors && city?.touched">
+            <p class="m-0" *ngIf="city?.getError('required')">city is required</p>
+          </div>
+          <span *ngIf="city?.valid && city?.touched">✅</span>
+          <span *ngIf="city?.invalid && city?.touched">❌</span>
+        </div>
+        <div>
+          <div class="form-group my-3"
+            [ngClass]="{'ng-valid':phone?.valid && phone?.touched,'ng-invalid':phone?.invalid && phone?.touched}">
+            <input type="tel" formControlName="phone" placeholder="Phone">
+          </div>
+          <div class="alert alert-danger" *ngIf="phone?.errors && phone?.touched">
+            <p class="m-0" *ngIf="phone?.getError('required')">Phone is required</p>
+          </div>
+          <span *ngIf="phone?.valid && phone?.touched">✅</span>
+          <span *ngIf="phone?.invalid && phone?.touched">❌</span>
+        </div>
+        <div>
+          <div class="form-group2 my-2">
+            <button type="submit" class="btn btn-success d-block ms-auto my-2" [disabled]="address.invalid">
+              <i class="fas fa-spinner fa-spin" *ngIf="IsLoading"></i>
+              <p class="m-0" *ngIf="!IsLoading">Save</p>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="d-none d-md-block col-md-6 text-center">
+      <img src="assets/images/Address-cuate.png" alt="img" class="img-fluid" id="responsive-image">
+    </div>
+  </div>
+</div>

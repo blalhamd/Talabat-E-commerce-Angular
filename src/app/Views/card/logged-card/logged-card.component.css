@@ -1,0 +1,21 @@
+h3,.color {
+  color: #4ca038 !important;
+}
+
+.border-main {
+  border: 1px solid #4ca038 !important;
+}
+
+.animation:hover {
+  background-color: #4ca038;
+  color: white;
+}
+
+img:hover {
+  scale: 1.011;
+}
+
+.main {
+  background-color: #4ca038 !important;
+  color: white;
+}

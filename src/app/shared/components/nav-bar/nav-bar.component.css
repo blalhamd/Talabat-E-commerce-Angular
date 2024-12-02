@@ -1,0 +1,11 @@
+.parent {
+  position: relative;
+}
+
+#child {
+  position: absolute;
+  right: -5px;
+  top: 0px;
+  font-weight: bold;
+  color: darkblue
+}

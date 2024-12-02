@@ -1,0 +1,46 @@
+<div class="row justify-content-between align-items-start p-4">
+  <div class="col-md-4 col-12 mt-3">
+    <form [formGroup]="LoginForm" (submit)="OnSubmit(LoginForm)" id="form">
+      <h4 class="text-center fw-bold my-2">Login</h4>
+      <div>
+        <div class="form-group my-3"
+          [ngClass]="{'ng-valid':email?.valid && email?.touched,'ng-invalid':email?.invalid && email?.touched}">
+          <input type="email" formControlName="email" placeholder="example@gmail.com">
+        </div>
+        <div class="alert alert-danger" *ngIf="email?.errors && email?.touched">
+          <p class="m-0" *ngIf="email?.getError('required')">Email is required</p>
+          <p class="m-0" *ngIf="email?.getError('email')">Email is invalid</p>
+        </div>
+        <span *ngIf="email?.valid && email?.touched">✅</span>
+        <span *ngIf="email?.invalid && email?.touched">❌</span>
+      </div>
+      <div>
+        <div class="form-group my-3"
+          [ngClass]="{'ng-valid':password?.valid && password?.touched,'ng-invalid':password?.invalid && password?.touched}">
+          <input type="password" formControlName="password" placeholder="*******">
+        </div>
+        <div class="alert alert-danger" *ngIf="password?.errors && password?.touched">
+          <p class="m-0" *ngIf="password?.getError('required')">Password is required</p>
+        </div>
+        <span *ngIf="password?.valid && password?.touched">✅</span>
+        <span *ngIf="password?.invalid && password?.touched">❌</span>
+      </div>
+      <div>
+        <div class="form-group2 my-2">
+          <button type="submit" class="btn btn-success d-block ms-auto my-2" [disabled]="LoginForm.invalid">
+            <p class="m-0" *ngIf="!IsLoading">Login</p>
+            <i class="fas fa-spinner fa-spin" *ngIf="IsLoading"></i>
+          </button>
+        </div>
+      </div>
+      <div class="d-flex flex-column gap-1">
+        <a href="/Auth/Authentication/Register">Sign Up</a>
+        <a href="#">Forget Password</a>
+        <a href="#">Login By Google</a>
+      </div>
+    </form>
+  </div>
+  <div class="d-none d-md-block col-md-6 text-center">
+    <img src="assets/images/Tablet login-bro.png" alt="img" class="img-fluid" id="responsive-image">
+  </div>
+</div>

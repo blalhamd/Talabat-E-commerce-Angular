@@ -1,0 +1,96 @@
+<!-- Product Details-->
+<div class="container">
+  <div class="row p-4">
+    <div class="col-12 my-3">
+      <div class="card">
+        <div class="row">
+          <div class="col-md-4 col-12">
+            <owl-carousel-o [options]="customOptions">
+              <ng-container *ngFor="let slide of product.images">
+                <ng-template carouselSlide>
+                  <img [src]="slide" alt="img" class="card-img-top">
+                </ng-template>
+              </ng-container>
+            </owl-carousel-o>
+          </div>
+          <div class="col-md-8 col-12 d-flex align-items-center justify-content-center gap-1">
+            <div class="card-body">
+              <h4 class="card-title">{{product.title}}</h4>
+              <p class="card-text text-muted">{{product.description}}</p>
+              <h6 class="card-title category">{{product.category.name}}</h6>
+              <div class="d-flex justify-content-between">
+                <h6>{{product.price}} EGP</h6>
+                <ng-container [ngSwitch]="true">
+                  <!-- 0.5 star -->
+                  <h6 *ngSwitchCase="product.ratingsAverage < 1">
+                    <i class="fas fa-star-half text-warning"></i>
+                    <i class="fas fa-star text-muted"></i>
+                    <i class="fas fa-star text-muted"></i>
+                    <i class="fas fa-star text-muted"></i>
+                    <i class="fas fa-star text-muted"></i>
+                    {{ product.ratingsAverage }}
+                  </h6>
+
+                  <!-- 1 - 1.5 stars -->
+                  <h6 *ngSwitchCase="product.ratingsAverage >= 1 && product.ratingsAverage < 2">
+                    <i class="fas fa-star text-warning"></i>
+                    <i *ngIf="product.ratingsAverage >= 1.5" class="fas fa-star-half text-warning"></i>
+                    <i *ngIf="product.ratingsAverage < 1.5" class="fas fa-star text-muted"></i>
+                    <i class="fas fa-star text-muted"></i>
+                    <i class="fas fa-star text-muted"></i>
+                    <i class="fas fa-star text-muted"></i>
+                    {{ product.ratingsAverage }}
+                  </h6>
+
+                  <!-- 2 - 2.5 stars -->
+                  <h6 *ngSwitchCase="product.ratingsAverage >= 2 && product.ratingsAverage < 3">
+                    <i class="fas fa-star text-warning"></i>
+                    <i class="fas fa-star text-warning"></i>
+                    <i *ngIf="product.ratingsAverage >= 2.5" class="fas fa-star-half text-warning"></i>
+                    <i *ngIf="product.ratingsAverage < 2.5" class="fas fa-star text-muted"></i>
+                    <i class="fas fa-star text-muted"></i>
+                    {{ product.ratingsAverage }}
+                  </h6>
+
+                  <!-- 3 - 3.5 stars -->
+                  <h6 *ngSwitchCase="product.ratingsAverage >= 3 && product.ratingsAverage < 4">
+                    <i class="fas fa-star text-warning"></i>
+                    <i class="fas fa-star text-warning"></i>
+                    <i class="fas fa-star text-warning"></i>
+                    <i *ngIf="product.ratingsAverage >= 3.5" class="fas fa-star-half text-warning"></i>
+                    <i *ngIf="product.ratingsAverage < 3.5" class="fas fa-star text-muted"></i>
+                    {{ product.ratingsAverage }}
+                  </h6>
+
+                  <!-- 4 - 4.5 stars -->
+                  <h6 *ngSwitchCase="product.ratingsAverage >= 4 && product.ratingsAverage < 5">
+                    <i class="fas fa-star text-warning"></i>
+                    <i class="fas fa-star text-warning"></i>
+                    <i class="fas fa-star text-warning"></i>
+                    <i class="fas fa-star text-warning"></i>
+                    <i *ngIf="product.ratingsAverage >= 4.5" class="fas fa-star-half text-warning"></i>
+                    <i *ngIf="product.ratingsAverage < 4.5" class="fas fa-star text-muted"></i>
+                    {{ product.ratingsAverage }}
+                  </h6>
+
+                  <!-- 5 stars -->
+                  <h6 *ngSwitchDefault>
+                    <i class="fas fa-star text-warning"></i>
+                    <i class="fas fa-star text-warning"></i>
+                    <i class="fas fa-star text-warning"></i>
+                    <i class="fas fa-star text-warning"></i>
+                    <i class="fas fa-star text-warning"></i>
+                    {{ product.ratingsAverage }}
+                  </h6>
+                </ng-container>
+
+              </div>
+              <button class="btn btn-success main-color w-100 my-2" (click)="OnClick(product._id)"> + Add To
+                Card</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

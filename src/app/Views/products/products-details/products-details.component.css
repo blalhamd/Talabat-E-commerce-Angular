@@ -1,0 +1,13 @@
+.card {
+  border: none;
+}
+
+.category {
+  color: rgb(69, 165, 69);
+}
+
+button:hover {
+  background-color: white;
+  border: 1px solid rgb(69, 165, 69);
+  color: black;
+}

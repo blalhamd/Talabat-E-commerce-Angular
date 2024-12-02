@@ -1,0 +1,88 @@
+.card-img-top {
+  max-height: 350px;
+}
+
+.category {
+  color: rgb(69, 165, 69);
+}
+
+/* Card hover animation */
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 10px;
+  overflow: hidden;
+  border: none;
+  position: relative;
+}
+
+.card:hover {
+  transform: translateY(-10px) scale(1.05); /* Lifts and scales the card slightly */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Adds a shadow for depth */
+  border: 1px solid rgb(99, 222, 99);
+}
+
+.card img {
+  transition: transform 0.3s ease; /* Smooth zoom effect for the image */
+}
+
+.card:hover img {
+  transform: scale(1.1); /* Slight zoom on the image */
+  margin-bottom: 10px;
+}
+
+/* Additional styling for the card body */
+.card-body {
+  transition: background-color 0.3s ease;
+}
+
+.card:hover .card-body {
+  background-color: #f8f9fa; /* Subtle background color change */
+}
+
+a {
+  text-decoration: none;
+}
+
+/* Input styling */
+.search-input {
+  padding-right: 40px; /* Add space for the search icon */
+  border-radius: 5px; /* Optional: Adjust border radius */
+}
+
+/* Search icon styling */
+.search-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6c757d; /* Gray color for the icon */
+  background-color: #f8f9fa; /* Optional background */
+  padding: 5px;
+  border-radius: 50%; /* Optional: Circle background */
+  cursor: pointer; /* Add a pointer cursor */
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+/* Hover effect on icon */
+.search-icon:hover {
+  color: #fff; /* White color on hover */
+  background-color: #007bff; /* Blue background on hover */
+}
+
+/* Styling for the hidden button */
+/* .add-btn {
+  transition: opacity 1s,transform 1s;
+  opacity: 0;
+  transform: translateY(100%);
+  width: 80%;
+  margin-left: 10%;
+  margin-right: auto;
+}
+
+.card:hover .add-btn {
+  transition: opacity .5s,transform .5s;
+  opacity: 1;
+  transform: translateY(0%);
+} */
+
+

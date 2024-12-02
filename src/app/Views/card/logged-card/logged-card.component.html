@@ -1,0 +1,38 @@
+<div class="row p-4" *ngIf="card.products.length>0; else ref">
+  <div class="col-12">
+    <h3 class="my-2">Shop Cart</h3>
+    <h6 class="text-main my-2">Total Price {{card.totalCartPrice}} EGP</h6>
+  </div>
+  <div class="row border-bottom py-3 b my-2 d-flex align-items-center" *ngFor="let item of card?.products">
+    <div class="col-1">
+      <img [src]="item?.product?.imageCover" alt="img" class="w-100">
+    </div>
+    <div class="col-11 d-flex justify-content-between">
+      <div>
+        <h6>{{item?.product?.title}}</h6>
+        <h6 class="color">Price: {{item?.price}}</h6>
+        <button (click)="RemoveSpecificItem(item?.product?.id!)" class="btn m-0 p-0 btn-sm">
+          <i class="fa-regular fa-trash-can color"></i>
+          Remove
+        </button>
+      </div>
+      <div>
+        <button class="btn border-main btn-sm animation"
+          (click)="IncremntQuantity(item?.product?.id!,(item.count+1))">+</button>
+        <span class="mx-2">{{item.count}}</span>
+        <ng-container *ngIf="item.count>0">
+          <button class="btn border-main btn-sm animation"
+            (click)="decremntQuantity(item?.product?.id!,(item.count-1))">-</button>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+  <div class="col-12" style="text-align:end">
+    <a routerLink="/user/order/checkout" [queryParams]="{ cardId: card._id}" class="btn main my-2">online Payment <img
+        src="assets/images/1156753_finance_payment_visa_icon.png" alt="visa" width="35" height="35"></a>
+  </div>
+</div>
+
+<ng-template #ref>
+  <h4 class="text-center my-2"><span class="text-danger">404 </span>Card Not Found</h4>
+</ng-template>
