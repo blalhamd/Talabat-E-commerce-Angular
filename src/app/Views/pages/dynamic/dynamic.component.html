@@ -65,9 +65,9 @@
       <!-- Add Question Button -->
       <button class="btn btn-success btn-sm my-2" (click)="AddQuestion()">Add New Question</button>
 
-      <!-- submit [disabled]="exam.invalid"-->
+      <!-- submit -->
       <div class="form-group my-2">
-        <input type="submit" class="btn btn-primary d-block ms-auto my-2" value="Save">
+        <input type="submit" class="btn btn-primary d-block ms-auto my-2" value="Save" [disabled]="exam.invalid">
       </div>
     </form>
   </div>
