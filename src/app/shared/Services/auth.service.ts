@@ -7,6 +7,7 @@ import { jwtDecode } from 'jwt-decode';
 import { isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
 import { RegisterModel } from '../Models/Register';
+import { Token_Key } from '../constants';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +20,7 @@ export class AuthService {
     @Inject(PLATFORM_ID) private platformId: Object // this line
   ) {
     if (isPlatformBrowser(this.platformId)) {
-      if (localStorage.getItem('token') !== null) {
+      if (localStorage.getItem(Token_Key) !== null) {
         this.decodeUserData();
       }
     }
@@ -27,7 +28,7 @@ export class AuthService {
 
   decodeUserData() {
     // get token
-    var token = JSON.stringify(localStorage.getItem('token'));
+    var token = JSON.stringify(localStorage.getItem(Token_Key));
     // decrypt
     var decodedToken: any = jwtDecode(token);
     // assign it to userData
@@ -50,10 +51,51 @@ export class AuthService {
 
   LogOut() {
     // remove token
-    localStorage.removeItem('token');
+    this.RemoveToken();
     // set userInfo null
     this.userData.next(null);
     // navigate to login
     this._router.navigate(['/Auth/Authentication/Login']);
+  }
+
+  IsLoggedIn() {
+    return localStorage.getItem(Token_Key) !== null ? true : false;
+  }
+
+  getToken() {
+    return localStorage.getItem(Token_Key);
+  }
+
+  SaveToken(token: string) {
+    localStorage.setItem(Token_Key, token);
+  }
+
+  RemoveToken() {
+    localStorage.removeItem(Token_Key!);
+  }
+
+  getName(): string {
+    // get token
+    var token = JSON.stringify(localStorage.getItem(Token_Key));
+    // decrypt
+    var decodedToken: any = jwtDecode(token);
+    return decodedToken.name;
+  }
+
+  getClaims() {
+    try {
+      const token = localStorage.getItem(Token_Key);
+
+      if (!token) {
+        console.error('No token found in localStorage');
+        return null;
+      }
+
+      const decodedToken: any = jwtDecode(token);
+      return decodedToken;
+    } catch (error) {
+      console.error('Error decoding token:', error);
+      return null;
+    }
   }
 }

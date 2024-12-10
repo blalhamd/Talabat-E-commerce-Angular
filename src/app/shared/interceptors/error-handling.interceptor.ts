@@ -31,7 +31,7 @@ export class errorHandlingInterceptor implements HttpInterceptor {
     switch (err.status) {
       case 401:
       case 403:
-        this._Router.navigate(['/Auth/login']);
+        this._Router.navigate(['/Auth/Authentication/Login']);
         return;
       case 404:
         errorMessage = 'Error 404: The requested resource was not found.';

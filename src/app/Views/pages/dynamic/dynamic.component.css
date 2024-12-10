@@ -1,0 +1,11 @@
+.card {
+  background-color: #eeeeeee3;
+  width: 50%;
+  margin-left: 25%;
+  margin-right: auto;
+}
+
+input:focus::placeholder {
+  font-size: small;
+  opacity: .7;
+}

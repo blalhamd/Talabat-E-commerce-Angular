@@ -5,12 +5,16 @@ import { AdminComponent } from './shared/components/layouts/admin/admin.componen
 import { UserComponent } from './shared/components/layouts/user/user.component';
 import { AuthComponent } from './shared/components/layouts/Auth/Auth.component';
 import { errorComponent } from './shared/components/error/error.component';
+import { authGuard } from './shared/Guards/auth.guard';
+import { ForbiddenComponent } from './shared/components/forbidden/forbidden.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'blank/pages', pathMatch: 'full' },
   {
     path: 'blank',
     component: BlankComponent,
+    canActivate: [authGuard],
+    canActivateChild: [authGuard],
     children: [
       {
         path: 'pages',
@@ -22,6 +26,8 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
+    canActivate: [authGuard],
+    canActivateChild: [authGuard],
     children: [
       {
         path: 'products',
@@ -35,6 +41,8 @@ const routes: Routes = [
   {
     path: 'user',
     component: UserComponent,
+    canActivate: [authGuard],
+    canActivateChild: [authGuard],
     children: [
       {
         path: 'products',
@@ -67,6 +75,10 @@ const routes: Routes = [
           ),
       },
     ],
+  },
+  {
+    path: 'forbidden',
+    component: ForbiddenComponent,
   },
   {
     path: 'error',

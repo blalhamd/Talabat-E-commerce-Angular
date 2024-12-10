@@ -42,6 +42,19 @@ export class RegisterComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.checkLogin();
+    this.CreateForm();
+  }
+
+  checkLogin() {
+    if (this._AuthService.IsLoggedIn()) {
+      this._router.navigate(['/blank/pages/home']);
+    } else {
+      this._router.navigate(['/Auth/Authentication/Register']);
+    }
+  }
+
+  CreateForm() {
     this.RegisterForm = this._fb.group(
       {
         name: [
@@ -67,17 +80,14 @@ export class RegisterComponent implements OnInit {
   }
 
   OnSubmit(model: FormGroup) {
-    console.log(model.value);
     this.IsLoading = true;
 
     this._AuthService.Register(model.value).subscribe({
-      next: (res) => {
-        console.log(res);
+      next: () => {
         this.IsLoading = false;
         this._router.navigate(['/Auth/Authentication/Login']);
       },
-      error: (err) => {
-        console.log(err);
+      error: () => {
         this.IsLoading = false;
       },
     });

@@ -5,4 +5,6 @@ import { Component } from '@angular/core';
   templateUrl: './blank.component.html',
   styleUrl: './blank.component.css',
 })
-export class BlankComponent {}
+export class BlankComponent {
+  constructor() {}
+}

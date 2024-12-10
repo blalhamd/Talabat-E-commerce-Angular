@@ -4,22 +4,36 @@ import { ProductsListComponent } from './products-list/products-list.component';
 import { ProductsDetailsComponent } from './products-details/products-details.component';
 import { ProductsAddComponent } from './products-add/products-add.component';
 import { ProductsUpdateComponent } from './products-update/products-update.component';
-import { authGuard } from '../../shared/Guards/auth.guard';
+import { RolesAndPermissions } from '../../shared/utiles/utile';
 
 const routes: Routes = [
   { path: '', redirectTo: 'list', pathMatch: 'full' },
-  { path: 'list', canActivate: [authGuard], component: ProductsListComponent },
+  {
+    path: 'list',
+    component: ProductsListComponent,
+    data: {
+      claimsReq: (claims: any) =>
+        claims.role ===
+        'Admin' /* && claims.permissions.includes('CanViewProducts') */,
+    },
+  },
   {
     path: 'Edit/:id',
-    canActivate: [authGuard],
     component: ProductsUpdateComponent,
+    data: { claimsReq: RolesAndPermissions.AdminOnly },
   },
   {
     path: 'list/:id',
-    canActivate: [authGuard],
     component: ProductsDetailsComponent,
+    data: {
+      claimsReq: RolesAndPermissions.AdminAndUser,
+    },
   },
-  { path: 'Add', canActivate: [authGuard], component: ProductsAddComponent },
+  {
+    path: 'Add',
+    component: ProductsAddComponent,
+    data: { claimsReq: RolesAndPermissions.AdminOnly },
+  },
 ];
 
 @NgModule({

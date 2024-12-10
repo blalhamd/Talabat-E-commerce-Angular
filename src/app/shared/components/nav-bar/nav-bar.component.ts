@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../Services/auth.service';
 import { CardService } from '../../Services/card.service';
+import { UserService } from '../../Services/user.service';
+import { RolesAndPermissions } from '../../utiles/utile';
 
 @Component({
   selector: 'app-nav-bar',
@@ -10,9 +12,16 @@ import { CardService } from '../../Services/card.service';
 export class NavBarComponent implements OnInit {
   IsLogin: boolean = false;
   numberOfItems: number = 0;
-  constructor(private _auth: AuthService, private _cardService: CardService) {}
+  Name: string = '';
+  rolesAndPermissions = RolesAndPermissions;
+  constructor(
+    private _auth: AuthService,
+    private _cardService: CardService,
+    private _UserService: UserService
+  ) {}
 
   ngOnInit(): void {
+    this.GetLoggedUserName();
     this._auth.userData.subscribe({
       next: () => {
         if (this._auth.userData.getValue() !== null) {
@@ -29,6 +38,12 @@ export class NavBarComponent implements OnInit {
         this.numberOfItems = res;
       },
     });
+  }
+
+  GetLoggedUserName() {
+    if (this._auth.IsLoggedIn()) {
+      this.Name = this._UserService.GetUserProfile();
+    }
   }
 
   OnLogOut() {

@@ -4,6 +4,7 @@ import { ProductService } from '../../../shared/Services/product.service';
 import { Product } from '../../../shared/Models/Product';
 import { CardService } from '../../../shared/Services/card.service';
 import Swal from 'sweetalert2';
+import { Token_Key } from '../../../shared/constants';
 
 @Component({
   selector: 'app-home',
@@ -25,7 +26,7 @@ export class HomeComponent implements OnInit {
   }
 
   CheckLogin() {
-    if (localStorage.getItem('token') === null) {
+    if (localStorage.getItem(Token_Key) === null) {
       this._Router.navigate(['Auth/Authentication/Login']);
     }
   }

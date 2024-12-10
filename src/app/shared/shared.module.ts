@@ -7,9 +7,18 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { SearchPipe } from './Pipes/search.pipe';
 import { errorComponent } from './components/error/error.component';
+import { ForbiddenComponent } from './components/forbidden/forbidden.component';
+import { ClaimsMetDirective } from './directives/claims-met.directive';
 
 @NgModule({
-  declarations: [NavBarComponent, FooterComponent, SearchPipe, errorComponent],
+  declarations: [
+    NavBarComponent,
+    FooterComponent,
+    SearchPipe,
+    errorComponent,
+    ForbiddenComponent,
+    ClaimsMetDirective,
+  ],
   imports: [
     CommonModule,
     LayoutsModule,

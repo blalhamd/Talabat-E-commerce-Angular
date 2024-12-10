@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../shared/Services/auth.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { IsEmailExist } from './validators/async.validator';
+import { EmailService } from '../../../shared/Services/email.service';
+import { Token_Key } from '../../../shared/constants';
 
 @Component({
   selector: 'app-login',
@@ -23,35 +26,45 @@ export class LoginComponent implements OnInit {
   constructor(
     private _fb: FormBuilder,
     private _AuthService: AuthService,
-    private _router: Router
+    private _router: Router,
+    private _emailService: EmailService
   ) {}
 
   ngOnInit(): void {
     this.checkLogin();
-    this.LoginForm = this._fb.group({
-      email: [null, [Validators.required, Validators.email]],
-      password: [null, Validators.required],
-    });
+    this.CreateForm();
   }
 
   checkLogin() {
-    if (localStorage.getItem('token') !== null) {
+    if (this._AuthService.IsLoggedIn()) {
       this._router.navigate(['/blank/pages/home']);
     }
   }
 
+  CreateForm() {
+    this.LoginForm = this._fb.group({
+      email: [
+        null,
+        {
+          validators: [Validators.required, Validators.email],
+          asyncValidators: [IsEmailExist(this._emailService)],
+          updateOn: 'blur', // Updates and validates on blur event
+        },
+      ],
+      password: [null, Validators.required],
+    });
+  }
+
   OnSubmit(model: FormGroup) {
-    console.log(model.value);
     this.IsLoading = true;
 
     this._AuthService.Login(model.value).subscribe({
       next: (res) => {
         if (res.message === 'success') {
           this.IsLoading = false;
-          console.log(res);
           this.ShowSuccessMessage();
           // set token in localStorage
-          localStorage.setItem('token', res.token);
+          this._AuthService.SaveToken(res.token);
           // decode userData
           this._AuthService.decodeUserData();
           // navigate to home page

@@ -10,6 +10,7 @@
         <div class="alert alert-danger" *ngIf="email?.errors && email?.touched">
           <p class="m-0" *ngIf="email?.getError('required')">Email is required</p>
           <p class="m-0" *ngIf="email?.getError('email')">Email is invalid</p>
+          <p class="m-0" *ngIf="email?.getError('usernameAlreadyExists')">Email is already in use</p>
         </div>
         <span *ngIf="email?.valid && email?.touched">✅</span>
         <span *ngIf="email?.invalid && email?.touched">❌</span>
@@ -34,7 +35,7 @@
         </div>
       </div>
       <div class="d-flex flex-column gap-1">
-        <a href="/Auth/Authentication/Register">Sign Up</a>
+        <a routerLink="/Auth/Authentication/Register">Sign Up</a>
         <a href="#">Forget Password</a>
         <a href="#">Login By Google</a>
       </div>

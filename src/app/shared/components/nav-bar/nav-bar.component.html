@@ -12,7 +12,8 @@
             <a class="nav-link text-light" href="/blank/pages/home" *ngIf="IsLogin">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-light" href="/user/products/list" *ngIf="IsLogin">Proudcts</a>
+            <a class="nav-link text-light" href="/user/products/list" [appClaimsMet]="rolesAndPermissions.AdminOnly"
+              *ngIf="IsLogin">Proudcts</a>
           </li>
         </ul>
         <ul class="navbar-nav">
@@ -23,6 +24,9 @@
           <li class="nav-item">
             <a class="nav-link text-light" routerLink='/Auth/Authentication/Register' routerLinkActive="active"
               *ngIf="!IsLogin">Register</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" routerLinkActive="active" *ngIf="IsLogin">Hello, {{Name}}</a>
           </li>
           <li class="nav-item">
             <a class="nav-link text-light" style="cursor: pointer;" (click)="OnLogOut()" routerLinkActive="active"

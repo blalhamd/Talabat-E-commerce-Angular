@@ -1,0 +1,74 @@
+<div class="container">
+  <div class="row card p-4">
+    <h4 class="text-center">Dynamic Form</h4>
+    <form [formGroup]="exam" (submit)="OnSave(exam)">
+      <!-- subject Name -->
+      <div class="form-group my-2">
+        <input type="text" formControlName="subjectName" class="form-control my-2" placeholder="Subject Name...">
+        <div class="alert alert-danger" *ngIf="subjectName?.errors && subjectName?.touched">
+          <p class="m-0" *ngIf="subjectName?.getError('required')">subject name is required</p>
+        </div>
+      </div>
+
+      <!-- number Of Questions -->
+      <div class="form-group my-2">
+        <input type="number" formControlName="numberOfQuestions" class="form-control my-2"
+          placeholder="number of questions...">
+        <div class="alert alert-danger" *ngIf="numberOfQuestions?.errors && numberOfQuestions?.touched">
+          <p class="m-0" *ngIf="numberOfQuestions?.getError('required')">number Of Questions is required</p>
+        </div>
+      </div>
+
+      <!-- doctor Name -->
+      <div class="form-group my-2">
+        <input type="text" formControlName="doctorName" class="form-control my-2" placeholder="doctor name...">
+        <div class="alert alert-danger" *ngIf="doctorName?.errors && doctorName?.touched">
+          <p class="m-0" *ngIf="doctorName?.getError('required')">doctor name is required</p>
+        </div>
+      </div>
+
+      <!--  questions -->
+      <div formArrayName="questions" *ngFor="let ques of questions?.controls; let i = index">
+        <div [formGroupName]="i">
+          <div class="form-group my-3">
+            <input type="text" formControlName="title" class="form-control my-2" placeholder="Question title...">
+            <div class="alert alert-danger" *ngIf="ques?.get('title')?.errors && ques?.get('title')?.touched">
+              <p class="m-0" *ngIf="ques?.get('title')?.getError('required')">Question Title is required</p>
+            </div>
+          </div>
+
+          <div class="form-group my-3">
+            <input type="number" formControlName="grade" class="form-control my-2" placeholder="grade...">
+            <div class="alert alert-danger" *ngIf="ques?.get('grade')?.errors && ques?.get('grade')?.touched">
+              <p class="m-0" *ngIf="ques?.get('grade')?.getError('required')">Question grade is required</p>
+            </div>
+          </div>
+          <!-- Add choice -->
+          <div formArrayName="choices">
+            <div *ngFor="let ch of getChoices(i)?.controls; let j = index" [formGroupName]="j">
+              <div class="form-group my-3">
+                <input type="text" formControlName="option" class="form-control my-2" [placeholder]="['option '+(j+1)]">
+                <div class="alert alert-danger" *ngIf="ch?.get('option')?.errors && ch?.get('option')?.touched">
+                  <p class="m-0" *ngIf="ch?.get('option')?.getError('required')">option is required</p>
+                </div>
+              </div>
+              <button class="btn btn-danger btn-sm my-2" (click)="DeleteChoice(i,j)">Delete Option {{j+1}}</button>
+            </div>
+            <!-- Add Option For Choice -->
+            <button class="btn btn-success btn-sm my-2" (click)="AddChoice(i)">Add Option</button>
+          </div>
+        </div>
+
+        <!-- Delete Question Button -->
+        <button class="btn btn-danger btn-sm my-2" (click)="DeleteQuestion(i)">Delete Question</button>
+      </div>
+      <!-- Add Question Button -->
+      <button class="btn btn-success btn-sm my-2" (click)="AddQuestion()">Add New Question</button>
+
+      <!-- submit [disabled]="exam.invalid"-->
+      <div class="form-group my-2">
+        <input type="submit" class="btn btn-primary d-block ms-auto my-2" value="Save">
+      </div>
+    </form>
+  </div>
+</div>
