@@ -11,12 +11,11 @@ export class DynamicComponent implements OnInit {
   get subjectName() {
     return this.exam?.get('subjectName');
   }
-  get numberOfQuestions() {
-    return this.exam?.get('numberOfQuestions');
-  }
+
   get doctorName() {
     return this.exam?.get('doctorName');
   }
+  
   get questions() {
     return this.exam.get('questions') as FormArray;
   }
@@ -32,7 +31,6 @@ export class DynamicComponent implements OnInit {
   CreateForm() {
     this.exam = this._fb.group({
       subjectName: [null, Validators.required],
-      numberOfQuestions: [null, Validators.required],
       doctorName: [null, Validators.required],
       questions: this._fb.array([this.CreateQuestion()]),
     });
